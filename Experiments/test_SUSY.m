@@ -1,13 +1,16 @@
-%% Load Dataset
-
-filepath = '/data/DATASETS/SUSY/Susy.mat';
 addpath(genpath('./'));
+addpath(genpath('../FALKON_TOOLS/'));
+addpath(genpath('./Utilities'));
+
+%% Load Dataset ----------
+
+filepath = '/DATASETS/Susy.mat';
 
 if ~exist('X' , 'var')
     load(filepath);
 end
 
-%% Preprocessing
+%% Preprocessing ----------
 
 renorm = @(W, Z) W*(diag(1./(std(Z))));
 recenter = @(W, Z) (renorm(W - ones(size(W,1),1)*mean(Z),Z));
@@ -29,7 +32,7 @@ Yts = X((ntr+1):(ntr+nts),1) .*2 - 1;
 
 clear X Xtr0
 
-%% Params
+%% Params ----------
 
 sigma = 4;
 kern =gaussianKernel(sigma);
@@ -45,7 +48,7 @@ callback = @(alpha, cobj) cobj;
 
 T = 20;
 
-%% FALKON
+%% FALKON ----------
 
 alpha = falkon(Xtr , Xuni , kern, Ytr, lambda, T, [], callback, [], 1);
 

@@ -1,14 +1,17 @@
 
-%% Load Dataset
-
-filepath = '/data/DATASETS/HIGGS_UCI/Higgs.mat';
 addpath(genpath('./'));
+addpath(genpath('../FALKON_TOOLS/'));
+addpath(genpath('./Utilities'));
+
+%% Load Dataset ----------
+
+filepath = '/DATASETS/Higgs.mat';
 
 if ~exist('X' , 'var')
     load(filepath);
 end
 
-%% Preprocessing
+%% Preprocessing ----------
 
 renorm = @(W, Z) W*(diag(1./(std(Z))).^2);
 recenter = @(W, Z) (renorm(W - ones(size(W,1),1)*mean(Z),Z));
@@ -28,7 +31,7 @@ Yts = X((ntr+1):(ntr+nts),1) .*2 - 1;
 
 clear X Xtr0
 
-%% Params
+%% Params ----------
 
 sigmas = [-2.969724653678234
   -2.104455363627951
@@ -72,7 +75,7 @@ T = 20;
 
 callback = @(alpha, cobj) cobj;
 
-%% FALKON
+%% FALKON ----------
 
 alpha = falkon(Xtr , Xuni , kern, Ytr, lambda, T, [], callback, [], 1);
 

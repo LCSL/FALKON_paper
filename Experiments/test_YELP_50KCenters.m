@@ -1,14 +1,16 @@
-
-%% Load Dataset
-
-filepath = '/data/DATASETS/YELP_Ben/YELP_Ben_OnlyONES.mat';
 addpath(genpath('./'));
+addpath(genpath('../FALKON_TOOLS/'));
+addpath(genpath('./Utilities'));
+
+%% Load Dataset ----------
+
+filepath = '/DATASETS/YELP.mat';
 
 if ~exist('X' , 'var')
     load(filepath);
 end
 
-%% Preprocessing
+%% Preprocessing ----------
 
 [n,d] = size(X);
 ntr = ceil(n*.8);
@@ -25,7 +27,7 @@ Yts = Y(ntr+1:nts+ntr,1);
 
 clear X Y;
 
-%% Params
+%% Params ----------
 
 m = 50000;
 
@@ -52,7 +54,7 @@ T = 35;
 
 callback = @(alpha, cobj) cobj;
 
-%% FALKON
+%% FALKON ----------
 
 alpha = falkon(Xtr, Xuni, kernel, Ytr, lambda, T, [], callback, [], 1);
 

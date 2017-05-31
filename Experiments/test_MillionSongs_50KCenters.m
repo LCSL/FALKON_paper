@@ -1,13 +1,16 @@
-%% Load Dataset
-
-filepath = '/data/DATASETS/MillionSongs/YearPredictionMSD.mat';
 addpath(genpath('./'));
+addpath(genpath('../FALKON_TOOLS/'));
+addpath(genpath('./Utilities'));
+
+%% Load Dataset ----------
+
+filepath = '/DATASETS/YearPredictionMSD.mat';
 
 if ~exist('X' , 'var')
     load(filepath);
 end
 
-%% Preprocessing
+%% Preprocessing ----------
 
 renorm = @(W, Z) W*(diag(1./(std(Z))));
 recenter = @(W, Z) (renorm(W - ones(size(W,1),1)*mean(Z),Z));
@@ -25,14 +28,14 @@ Yts = recenter(X((ntr+1):(ntr+nts),1), Ytr0);
 
 clear X Xtr0
 
-%% Params
+%% Params ----------
 
 sigma = 6;
 kern =  gaussianKernel(sigma);
 
 lambda = 1e-6;
 
-m = 10000;
+m = 50000;
 
 trp =  randperm(ntr,m);
 Xuni = Xtr(trp,:);
@@ -41,7 +44,7 @@ T = 20;
 
 callback = @(alpha, cobj) cobj;
 
-%% FALKON
+%% FALKON ----------
 
 alpha = falkon(Xtr , Xuni , kern, Ytr, lambda, T, [], callback, [], 1);
 

@@ -1,14 +1,16 @@
-
-%% Load Dataset
-
-filepath = '/data/DATASETS/TIMIT/TIMIT.mat';
 addpath(genpath('./'));
+addpath(genpath('../FALKON_TOOLS/'));
+addpath(genpath('./Utilities'));
+
+%% Load Dataset ----------
+
+filepath = '/DATASETS/TIMIT.mat';
 
 if ~exist('X' , 'var')
     load(filepath);
 end
 
-%% Preprocessing
+%% Preprocessing ----------
 
 renorm = @(W, Z) W*(diag(1./(std(Z))));
 recenter = @(W, Z) (renorm(W - ones(size(W,1),1)*mean(Z),Z));
@@ -25,7 +27,7 @@ Yts = double(Yts);
 
 clear Xtr0
 
-%% Params
+%% Params ----------
 
 sigma = 15;
 kern = gaussianKernel(sigma);
@@ -41,7 +43,7 @@ T = 25;
 
 callback = @(alpha, cobj) cobj;
 
-%% FALKON
+%% FALKON ----------
 
 alpha = falkon(Xtr , Xuni , kern, Ytr, lambda, T, [], callback, [], 1);
 
