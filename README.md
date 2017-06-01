@@ -33,12 +33,13 @@ If the GPU flag is set at 1 the first GPU of the machine will be used.
 
 Example:
 
-Once loaded `Xtr`, `Ytr` as the training set, the following script executes FALKON with a Guassian kernel of width 15,
+Assuming to have already loaded and preprocessed `Xtr`, `Ytr` as the training set and `Xts`, `Yts` as the test set, the following script executes FALKON with a Guassian kernel of width 15,
 a lambda 0.001, 10,000 Nystrom centers for 10 iterations. Note that for how the code has been written, FALKON is not using
 any support object and callback. Furthermore the GPU will be used for the computations and
 specifying `[]` as `memToUse` the function will use all the free memory available on the machine.
 
 ```matlab
+addpath(genpath('../'));
 
 % kernel to use
 sigma = 15;
@@ -71,6 +72,15 @@ memToUse = [];
 useGPU = 1;
 
 alpha = falkon(Xtr , C , kernel, Ytr, lambda, T, cobj, callback, memToUse, useGPU);
+```
+
+To test the predictor learned above on the test set `Xts`, `Yts`, we compute for example the mean square error (MSE) with the help of the function `KtsProd` as follows
+
+```matlab
+
+Ypred = KtsProd(Xts, C, alpha, 10, kernel);
+
+MSE = mean((Yts - Ypred).^2)
 ```
 
 Experiments
