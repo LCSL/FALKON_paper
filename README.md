@@ -27,11 +27,13 @@ falkon(Xtr, C, kernel, Ytr, lambda, T, cobj, callback, memToUse, useGPU)
 
 which returns the coefficients vector alpha.
 
-The function arguments are respectively: the matrix $\mathcal{R}^{n\times d}$ of training points `Xtr`, the matrix of the Nystrom centers `C`, the kernel to use `kernel`, the labels of the training points `Ytr`, the regularization parameter `lambda`, the number of iterations `T`, a support object `cobj` , a callback function `callback`, the maximum memory to use for the computations `memToUse`, a binary flag indicating if to use the GPU `useGPU`.
+The function arguments are respectively: the matrix of training points `Xtr` $\in\mathbb{R}^{n\times d}$, the matrix of the Nystrom centers `C` $\in\mathbb{R}^{m\times d}$, the kernel to use `kernel`, the labels of the training points `Ytr` $\in\mathbb{R}^{n\times 1}$, the regularization parameter `lambda`, the number of iterations `T`, a support object `cobj` , a callback function `callback`, the maximum GB of memory to use for the computations `memToUse`, a binary flag indicating if to use the GPU `useGPU`.
+
+If the GPU flag is set at 1 the first GPU of the machine will be used.
 
 Example:
 
-Given `Xtr`, `Ytr` as the training set, the above script executes FALKON with a Guassian kernel of width 15,
+Once loaded `Xtr`, `Ytr` as the training set, the following script executes FALKON with a Guassian kernel of width 15,
 a lambda 0.001, 10,000 Nystrom centers for 10 iterations. Note that for how the code has been written, FALKON is not using
 any support object and callback. Furthermore the GPU will be used for the computations and
 specifying `[]` as `memToUse` the function will use all the free memory available on the machine.
@@ -56,13 +58,16 @@ C = Xtr(trp,:);
 %number of iterations
 T = 10;
 
-%
+% empty object
 cobj = [];
 
+% empty callback
 callback = @(alpha, cobj) [];
 
+% GB of memory to use (using "[]" will allow the machine to use all the free memory)
 memToUse = [];
 
+% flag for using or not the GPU
 useGPU = 1;
 
 alpha = falkon(Xtr , C , kernel, Ytr, lambda, T, cobj, callback, memToUse, useGPU);
