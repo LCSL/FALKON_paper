@@ -10,11 +10,12 @@ Installation on LINUX
 
 To install the code move the MATLAB shell path to the FALKON folder and
 run:
-
+```
 mex -largeArrayDims ./tri_solve_d.cpp -lmwblas -lmwlapack
-
+```
+```
 mex -largeArrayDims ./inplace_chol.cpp -lmwblas -lmwlapack
-
+```
 Furthermore the "free" command line linux tool needs to be installed on your machine.
 
 FALKON
@@ -29,20 +30,25 @@ The function arguments are respectively: the training points "X", the matrix of 
 
 Example:
 
+Given "Xtr", "Ytr" as the training set, the above script executes FALKON with a Guassian kernel of width 15,
+a lambda 0.001, 10,000 Nystrom centers for 10 iterations. Note that the code is not using
+any support function and callback, and the GPU will be used for the computations. Furthermore
+specifying "[]" as "memToUse" the function will use all the free memory available on the machine.
+
 ```matlab
 ntr = size(Xtr,1);
 
 sigma = 15;
 kern = gaussianKernel(sigma);
 
-lambda = 1e-4;
+lambda = 1e-3;
 
 m = 10000;
 
 trp = randperm(ntr,m);
 Xuni = Xtr(trp,:);
 
-T = 25;
+T = 10;
 
 callback = @(alpha, cobj) cobj;
 
