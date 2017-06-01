@@ -1,4 +1,4 @@
-function [alpha] = falkon(X, C, kernel, y, lambda, T, cbobj, callback, memToUse, useGPU)
+function [alpha] = falkon(X, C, kernel, y, lambda, T, cobj, callback, memToUse, useGPU)
     n = size(X,1); m = size(C,1);
 
 	isXsparse = issparse(X);
@@ -48,7 +48,7 @@ function [alpha] = falkon(X, C, kernel, y, lambda, T, cbobj, callback, memToUse,
     b = cholAt(cholRt(KnmP([], double(y)/double(n))));
     mW = @(z) multW(KnmP, lambda, z, n, cholR, cholRt, cholA, cholAt);
     ncb = @(c, cobj) callback(cholR(cholA(c)), cobj);
-    c = conjgrad(mW, b, T, [], cbobj, ncb);
+    c = conjgrad(mW, b, T, [], cobj, ncb);
     time_cg = toc;
     disp(['Iterations required ', num2str(time_cg), ' seconds']);
 
