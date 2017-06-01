@@ -4,7 +4,7 @@ addpath(genpath('../'));
 %% Load Dataset ----------
 
 % The training set has been generated according to standard practice in speech community,
-% as in "Belkin, M., & Ma, S. (2017). Diving into the shallows: a computational perspective on large-scale shallow learning" (https://arxiv.org/abs/1703.10622),
+% as in "Belkin M., & Ma S. (2017). Diving into the shallows: a computational perspective on large-scale shallow learning" (https://arxiv.org/abs/1703.10622),
 % see also https://infoscience.epfl.ch/record/192584.
 % The testing set is copyrighted so we can not circulate it.
 filepath = '/DATASETS/TIMIT.mat';
