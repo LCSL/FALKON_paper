@@ -3,6 +3,8 @@ addpath(genpath('../'));
 
 %% Load Dataset ----------
 
+% the dataset can be downloaded from https://archive.ics.uci.edu/ml/datasets/SUSY
+% and it needs to be converted from ".csv" to ".mat"
 filepath = '/DATASETS/Susy.mat';
 
 if ~exist('X' , 'var')

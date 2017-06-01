@@ -3,6 +3,8 @@ addpath(genpath('../'));
 
 %% Load Dataset ----------
 
+% the training set has been generated according to standard practice in speech community (https://infoscience.epfl.ch/record/192584),
+% the testing set is copyrighted so we can not circulate it
 filepath = '/DATASETS/TIMIT.mat';
 
 if ~exist('X' , 'var')

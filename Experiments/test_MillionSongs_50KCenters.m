@@ -3,6 +3,8 @@ addpath(genpath('../'));
 
 %% Load Dataset ----------
 
+% the dataset can be downloaded from https://archive.ics.uci.edu/ml/datasets/YearPredictionMSD
+% and it needs to be converted from ".txt" to ".mat"
 filepath = '/DATASETS/YearPredictionMSD.mat';
 
 if ~exist('X' , 'var')
