@@ -3,7 +3,7 @@
 Intro
 ---------------------
 
-In this repository we present you the code used to run the experiments of the paper `FALKON: An Optimal Large Scale Kernel Method" (https://arxiv.org/abs/1705.10958).
+In this repository we present you the code used to run the experiments of the paper "FALKON: An Optimal Large Scale Kernel Method" (https://arxiv.org/abs/1705.10958).
 
 Installation on LINUX
 ---------------------
@@ -32,8 +32,8 @@ The function arguments are respectively: the training points `X`, the matrix of 
 Example:
 
 Given `Xtr`, `Ytr` as the training set, the above script executes FALKON with a Guassian kernel of width 15,
-a lambda 0.001, 10,000 Nystrom centers for 10 iterations. Note that the code is not using
-any support function and callback, and the GPU will be used for the computations. Furthermore
+a lambda 0.001, 10,000 Nystrom centers for 10 iterations. Note that for how the code has been written, FALKON is not using
+any support function and callback. Furthermore the GPU will be used for the computations and
 specifying `[]` as `memToUse` the function will use all the free memory available on the machine.
 
 ```matlab
