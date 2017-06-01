@@ -3,7 +3,7 @@
 Intro
 ---------------------
 
-In this repository we present you the code used to run the experiments of the paper "FALKON: An Optimal Large Scale Kernel Method" (https://arxiv.org/abs/1705.10958).
+In this repository we present you the code used to run the experiments of the paper `FALKON: An Optimal Large Scale Kernel Method" (https://arxiv.org/abs/1705.10958).
 
 Installation on LINUX
 ---------------------
@@ -21,19 +21,20 @@ Furthermore the "free" command line linux tool needs to be installed on your mac
 FALKON
 ---------------------
 The algorithm is implemented by the function
-
+```matlab
 falkon(X, C, kernel, y, lambda, T, cbobj, callback, memToUse, useGPU)
+```
 
 which returns the coefficients vector alpha.
 
-The function arguments are respectively: the training points "X", the matrix of the Nystrom centers "C", the kernel to use, the labels of the training points "y", the regularization parameter "lambda", the number of iterations "T", a support function "cobj" , a callback function, the maximum memory to use for the computations, a binary flag indicating if to use the GPU.
+The function arguments are respectively: the training points `X`, the matrix of the Nystrom centers `C`, the kernel to use, the labels of the training points `y`, the regularization parameter `lambda`, the number of iterations `T`, a support function `cobj` , a callback function, the maximum memory to use for the computations, a binary flag indicating if to use the GPU.
 
 Example:
 
-Given "Xtr", "Ytr" as the training set, the above script executes FALKON with a Guassian kernel of width 15,
+Given `Xtr`, `Ytr` as the training set, the above script executes FALKON with a Guassian kernel of width 15,
 a lambda 0.001, 10,000 Nystrom centers for 10 iterations. Note that the code is not using
 any support function and callback, and the GPU will be used for the computations. Furthermore
-specifying "[]" as "memToUse" the function will use all the free memory available on the machine.
+specifying `[]` as `memToUse` the function will use all the free memory available on the machine.
 
 ```matlab
 ntr = size(Xtr,1);
