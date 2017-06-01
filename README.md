@@ -19,7 +19,6 @@ Furthermore the "free" command line linux tool needs to be installed on your mac
 
 FALKON
 ---------------------
-
 The algorithm is implemented by the function
 
 falkon(X, C, kernel, y, lambda, T, cbobj, callback, memToUse, useGPU)
