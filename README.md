@@ -27,7 +27,7 @@ falkon(Xtr, C, kernel, Ytr, lambda, T, cobj, callback, memToUse, useGPU)
 
 which returns the coefficients vector alpha.
 
-The function arguments are respectively: the matrix of training points `Xtr` $\in\mathbb{R}^{n\times d}$, the matrix of the Nystrom centers `C` $\in\mathbb{R}^{m\times d}$, the kernel to use `kernel`, the labels of the training points `Ytr` $\in\mathbb{R}^{n\times 1}$, the regularization parameter `lambda`, the number of iterations `T`, a support object `cobj` , a callback function `callback`, the maximum GB of memory to use for the computations `memToUse`, a binary flag indicating if to use the GPU `useGPU`.
+The function arguments are respectively: the matrix *n* x *d* of training points `Xtr` (where *n* is the number of points and *d* the dimensionality), the matrix *m* x *d* of *m* Nystrom centers `C`, the kernel to use `kernel`, the matrix *n* x *t* of the labels of the training points `Ytr` (where *t* is ...), the regularization parameter `lambda`, the number of iterations `T`, a support object `cobj` , a callback function `callback`, the maximum GB of memory to use for the computations `memToUse`, a binary flag indicating if to use the GPU `useGPU`.
 
 If the GPU flag is set at 1 the first GPU of the machine will be used.
 
