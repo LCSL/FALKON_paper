@@ -78,8 +78,10 @@ To test the predictor learned above on the test set `Xts`, `Yts`, we compute for
 
 ```matlab
 
+% prediction values on the test set Xts
 Ypred = KtsProd(Xts, C, alpha, 10, kernel);
 
+% mean square error
 MSE = mean((Yts - Ypred).^2)
 ```
 
