@@ -1,5 +1,5 @@
 addpath(genpath('./'));
-addpath(genpath('../FALKON_TOOLS/'));
+addpath(genpath('../FALKON/'));
 addpath(genpath('./Utilities'));
 
 %% Load Dataset ----------
