@@ -36,7 +36,7 @@ clear X Xtr0
 %% Params ----------
 
 sigma = 4;
-kern =gaussianKernel(sigma);
+kernel =gaussianKernel(sigma);
 
 m = 10000;
 
@@ -45,15 +45,21 @@ Xuni = Xtr(trp,:);
 
 lambda = 1e-6;
 
-callback = @(alpha, cobj) cobj;
-
 T = 20;
+
+cobj = [];
+
+callback = @(alpha, cobj) [];
+
+memToUse = [];
+
+useGPU = 1;
 
 %% FALKON ----------
 
-alpha = falkon(Xtr , Xuni , kern, Ytr, lambda, T, [], callback, [], 1);
+alpha = falkon(Xtr , Xuni , kernel, Ytr, lambda, T, cobj, callback, memToUse, useGPU);
 
-tic; Ypred = KtsProd(Xts, Xuni, alpha, 20, kern); toc
+tic; Ypred = KtsProd(Xts, Xuni, alpha, 20, kernel); toc
 
 MSE = mean((Yts-Ypred).^2)
 C_ERR = mean(Yts ~= sign(Ypred))

@@ -3,7 +3,7 @@ addpath(genpath('../'));
 
 %% Load Dataset ----------
 
-% The training set has been generated extracting the 3-grams from the plain text of the reviews of the "YELP Dataset round 6" as 
+% The training set has been generated extracting the 3-grams from the plain text of the reviews of the "YELP Dataset round 6" as
 % "Roelofs R., Recht B., Tu S., & Venkataraman S. (2016). Large Scale Kernel Learning using Block Coordinate Descent" (https://arxiv.org/abs/1602.05310)
 % Then for each training point (representing a review) has been saved as a binary sparse vector that indicate if a 3-gram is present in the review.
 filepath = '/DATASETS/YELP.mat';
@@ -54,12 +54,18 @@ lambda = 1e-7;
 
 T = 35;
 
-callback = @(alpha, cobj) cobj;
+cobj = [];
+
+callback = @(alpha, cobj) [];
+
+memToUse = [];
+
+useGPU = 1;
 
 %% FALKON ----------
 
-alpha = falkon(Xtr, Xuni, kernel, Ytr, lambda, T, [], callback, [], 1);
+alpha = falkon(Xtr , Xuni , kernel, Ytr, lambda, T, cobj, callback, memToUse, useGPU);
 
-tic; Ypred = KtsProd(Xts, Xuni, alpha, 10, kernel); toc
+tic; Ypred = KtsProd(Xts, Xuni, alpha, 20, kernel); toc
 
 RMSE = sqrt(mean((Yts - Ypred).^2))

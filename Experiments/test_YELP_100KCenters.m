@@ -54,12 +54,18 @@ lambda = 1e-7;
 
 T = 35;
 
-callback = @(alpha, cobj) cobj;
+cobj = [];
+
+callback = @(alpha, cobj) [];
+
+memToUse = [];
+
+useGPU = 1;
 
 %% FALKON ----------
 
-alpha = falkon(Xtr, Xuni, kernel, Ytr, lambda, T, [], callback, [], 1);
+alpha = falkon(Xtr , Xuni , kernel, Ytr, lambda, T, cobj, callback, memToUse, useGPU);
 
-tic; Ypred = KtsProd(Xts, Xuni, alpha, 10, kernel); toc
+tic; Ypred = KtsProd(Xts, Xuni, alpha, 20, kernel); toc
 
 RMSE = sqrt(mean((Yts - Ypred).^2))

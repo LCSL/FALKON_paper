@@ -61,7 +61,7 @@ sigmas = [-2.969724653678234
   -2.902452018286060
   -3.508393560237325];
 S = diag(exp(sigmas));
-kern = gaussianKernel_MWs(S);
+kernel = gaussianKernel_MWs(S);
 
 m = 100000;
 
@@ -72,13 +72,19 @@ lambda = 1e-8;
 
 T = 20;
 
-callback = @(alpha, cobj) cobj;
+cobj = [];
+
+callback = @(alpha, cobj) [];
+
+memToUse = [];
+
+useGPU = 1;
 
 %% FALKON ----------
 
-alpha = falkon(Xtr , Xuni , kern, Ytr, lambda, T, [], callback, [], 1);
+alpha = falkon(Xtr , Xuni , kernel, Ytr, lambda, T, cobj, callback, memToUse, useGPU);
 
-tic; Ypred = KtsProd(Xts, Xuni, alpha, 50, kern); toc
+tic; Ypred = KtsProd(Xts, Xuni, alpha, 50, kernel); toc
 
 MSE = mean((Yts-Ypred).^2)
 [~,~,~,AUC] = perfcurve(Yts,Ypred,1)
