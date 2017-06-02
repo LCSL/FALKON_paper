@@ -91,4 +91,7 @@ Experiments
 In the Experiments folder there are scripts to reproduce the experiments of the paper
 for the different datasets and with different settings.
 
+These scripts assume to receive the respective dataset with the features already extracted
+where specified (see comments in the code)
+
 Remember to add the correct path of the dataset in these scripts.
