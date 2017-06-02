@@ -97,9 +97,13 @@ where specified (see comments in the code) and in a ".mat" format.
 Example:
 
 Immagine you want to run FALKON on the MillionSongs dataset with the same setting presented
-in the table of the FALKON paper (10,000 Nystrom centers).
-Download the dataset (https://archive.ics.uci.edu/ml/datasets/YearPredictionMSD)
-Convert the data format from ".txt" to ".mat" (e.g. see MATLAB `fscanf` function).
-Once you have saved the dataset in the new format modify the `filepath` variable in the script
+in the table of the FALKON paper (10,000 Nystrom centers):
+
+* Download the dataset (https://archive.ics.uci.edu/ml/datasets/YearPredictionMSD)
+
+* Convert the data format from ".txt" to ".mat" (e.g. see MATLAB `fscanf` function).
+
+* Once you have saved the dataset in the new format modify the `filepath` variable in the script
 `test_MillionSongs_10KCenters.m` with the ".mat" file path.
-Then run the script and enjoy the results.
+
+* Then run the script and enjoy the results.
