@@ -31,7 +31,7 @@ The function arguments are respectively: the matrix *n* x *d* of training points
 
 If the GPU flag is set at 1 the first GPU of the machine will be used.
 
-Example:
+*Example*:
 
 Assuming to have already loaded and preprocessed `Xtr`, `Ytr` as the training set and `Xts`, `Yts` as the test set, the following script executes FALKON with a Guassian kernel of width 15,
 a lambda 0.001, 10,000 Nystrom centers for 10 iterations. Note that for how the code has been written, FALKON is not using
@@ -94,7 +94,7 @@ for the different datasets and with different settings.
 These scripts assume to receive the respective dataset with the features already extracted
 where specified (see comments in the code) and in a ".mat" format.
 
-Example:
+*Example*:
 
 Immagine you want to run FALKON on the MillionSongs dataset with the same setting presented
 in the table of the FALKON paper (10,000 Nystrom centers):
