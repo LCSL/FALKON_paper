@@ -74,7 +74,7 @@ useGPU = 1;
 alpha = falkon(Xtr , C , kernel, Ytr, lambda, T, cobj, callback, memToUse, useGPU);
 ```
 
-To test the predictor learned above on the test set `Xts`, `Yts`, we compute for example the mean square error (MSE) with the help of the function `KtsProd` as follows
+To test the predictor learned above on the test set `Xts`, `Yts`, we compute the mean square error (MSE) with the help of the function `KtsProd` as follows
 
 ```matlab
 
@@ -96,14 +96,14 @@ where specified (see comments in the code) and in a ".mat" format.
 
 *Example*:
 
-Immagine you want to run FALKON on the MillionSongs dataset with the same setting presented
-in the table of the FALKON paper (10,000 Nystrom centers):
+To run FALKON on the MillionSongs dataset with the same setting presented
+in the table of the paper (10,000 Nystrom centers):
 
 * Download the dataset (https://archive.ics.uci.edu/ml/datasets/YearPredictionMSD)
 
 * Convert the data format from ".txt" to ".mat" (e.g. see MATLAB `fscanf` function).
 
-* Once you have saved the dataset in the new format modify the `filepath` variable in the script
+* Once you have saved the dataset in the new format, modify the `filepath` variable in the script
 `test_MillionSongs_10KCenters.m` with the ".mat" file path.
 
-* Then run the script and enjoy the results.
+* Run the script and enjoy the results.
