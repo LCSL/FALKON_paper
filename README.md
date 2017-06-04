@@ -28,7 +28,7 @@ alpha = falkon(Xtr, C, kernel, Ytr, lambda, T, cobj, callback, memToUse, useGPU)
 Input:
 * `Xtr`, *n* x *d* matrix, containing the training points  (*n* is the number of points and *d* the dimensionality);
 * `C`, *m* x *d* matrix, containing the Nystrom centers;
-* `kernel`, the kernel to use. It can be function handler, like `gaussianKernel(5.0)` for a gaussian kernel of standard deviation `5.0`, or `{'linear', q, m}` for the linear kernel `K(x1,x2) = q + m x1'*x2`; 
+* `kernel`, the kernel to use. It can be function handler, like `gaussianKernel(5.0)` for a gaussian kernel of standard deviation `5.0`, or `{'linear', q, m}` for the linear kernel `K(x1,x2) = q + m x1'*x2`; Note that, in case of function handler passed as parameter, the function is assumed to take two matrices in input (assume `X1`:`r` x `d` and `X2`:`s`x`d`), and give in output the Gram kernel matrix (of dimension `r`x`s`). The function `gaussianKernel` takes a standard deviation in input and outputs a function computing the gaussian kernel with such std; 
 * `Ytr`,*n* x *t* matrix, containing the labels of the training points  (where *t* is the length of the label vector associated to each point. It is 1 for monovariate regression problems and binary classification, otherwise it is equal to the number of classes, for multiclass classification tasks or for multivariate regression); 
 * `lambda`,positive double, the regularization parameter;
 * `T`, positive integer, the number of iterations;
