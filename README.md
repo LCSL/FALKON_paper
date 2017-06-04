@@ -3,7 +3,8 @@
 Intro
 ---------------------
 
-In this repository we present you the code used to run the experiments of the paper "FALKON: An Optimal Large Scale Kernel Method" (https://arxiv.org/abs/1705.10958).
+This repository provides the code used to run the experiments of the paper "FALKON: An Optimal Large Scale Kernel Method" (https://arxiv.org/abs/1705.10958).
+In particular, the folder FALKON contains a preliminary MATLAB implementation of the algorithm, that uses CPU and one GPU.
 
 Installation on LINUX
 ---------------------
@@ -22,21 +23,28 @@ FALKON
 ---------------------
 The algorithm is implemented by the function
 ```matlab
-falkon(Xtr, C, kernel, Ytr, lambda, T, cobj, callback, memToUse, useGPU)
+alpha = falkon(Xtr, C, kernel, Ytr, lambda, T, cobj, callback, memToUse, useGPU)
 ```
+Input:
+* `Xtr`, *n* x *d* matrix, containing the training points  (*n* is the number of points and *d* the dimensionality);
+* `C`, *m* x *d* matrix, containing the Nystrom centers;
+* `kernel`, the kernel to use. It can be function handler, like `gaussianKernel(5.0)` for a gaussian kernel of standard deviation `5.0`, or `{'linear', q, m}` for the linear kernel `K(x1,x2) = q + m x1'*x2`; 
+* `Ytr`,*n* x *t* matrix, containing the labels of the training points  (where *t* is the length of the label vector associated to each point. It is 1 for monovariate regression problems and binary classification, otherwise it is equal to the number of classes, for multiclass classification tasks or for multivariate regression); 
+* `lambda`,positive double, the regularization parameter;
+* `T`, positive integer, the number of iterations;
+* `cobj, callback` respectively a support object and callback function called at the end of each iteration; e.g. `cobj = []; callback = @(alpha, cobj_iter) [];` to do nothing. To understand how to use them, note that at each iteration `cobj_iter = callback(alpha, cobj_iter)`.
+* `memToUse`, positive double, the maximum amount of RAM memory to use, in GB; If `memToUse = []` FALKON will compute it automatically.
+* `useGPU`, a binary flag to specify if to use the GPU. If the GPU flag is set at 1 the first GPU of the machine will be used.
 
-which returns the coefficients vector alpha.
 
-The function arguments are respectively: the matrix *n* x *d* of training points `Xtr` (where *n* is the number of points and *d* the dimensionality), the matrix *m* x *d* of *m* Nystrom centers `C`, the kernel to use `kernel`, the matrix *n* x *t* of the labels of the training points `Ytr` (where *t* is 1 for regression problems and binary classification ones, otherwise for multiclass classification tasks it is the number of classes), the regularization parameter `lambda`, the number of iterations `T`, a support object `cobj` , a callback function `callback`, the maximum GB of memory to use for the computations `memToUse`, a binary flag indicating if to use the GPU `useGPU`.
-
-If the GPU flag is set at 1 the first GPU of the machine will be used.
+Output:
+* `alpha`, `m`x`t` matrix, containing the vector of coefficients of the model
 
 *Example*:
 
-Assuming to have already loaded and preprocessed `Xtr`, `Ytr` as the training set and `Xts`, `Yts` as the test set, the following script executes FALKON with a Guassian kernel of width 15,
-a lambda 0.001, 10,000 Nystrom centers for 10 iterations. Note that for how the code has been written, FALKON is not using
-any support object and callback. Furthermore the GPU will be used for the computations and
-specifying `[]` as `memToUse` the function will use all the free memory available on the machine.
+In this example we assume to have already loaded and preprocessed `Xtr`, `Ytr` (training set) and `Xts`, `Yts` (test set), the following script executes FALKON, for 10 iterations, with a Gaussian kernel of width 15,
+a `lambda=0.001`, 10,000 Nystrom centers. Note that in the following code 1) FALKON is not using
+any support object and callback, 2) the GPU will be used for the computations and 3) the function will use all the free memory available on the machine (depending on the dimensionality of the problem).
 
 ```matlab
 addpath(genpath('../'));
@@ -79,7 +87,7 @@ To test the predictor learned above on the test set `Xts`, `Yts`, we compute the
 ```matlab
 
 % prediction values on the test set Xts
-Ypred = KtsProd(Xts, C, alpha, 10, kernel);
+Ypred = KtsProd(Xts, C, alpha, blk, kernel);
 
 % mean square error
 MSE = mean((Yts - Ypred).^2)
