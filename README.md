@@ -26,10 +26,10 @@ The algorithm is implemented by the function
 alpha = falkon(Xtr, C, kernel, Ytr, lambda, T, cobj, callback, memToUse, useGPU)
 ```
 Input:
-* `Xtr`, *n* x *d* matrix, containing the training points  (*n* is the number of points and *d* the dimensionality);
-* `C`, *m* x *d* matrix, containing the Nystrom centers;
+* `Xtr`, `n` x `d` matrix, containing the training points  (*n* is the number of points and *d* the dimensionality);
+* `C`, `m` x `d` matrix, containing the Nystrom centers;
 * `kernel`, the kernel to use. For a non-linear kernel it must be a function handler. In particular the function is assumed to take two matrices in input (assume `X1`:`r` x `d` and `X2`:`s`x`d`), and give in output the Gram kernel matrix (of dimension `r`x`s`). E. g. `kernel = @(X1, X2) (1 + X1*X2').^2` for the polynomial kernel of degree two. To specify a linear kernel of the form `q + m *X1*X2` use the notation `{'linear', q, m}`, in this way FALKON will use optimized execution for linear kernels. Finally you can use the helper function `gaussianKernel` and `gaussianKernel_MWs` to produce gaussian kernels, e.g. `kernel = gaussianKernel(5.0)` to gaussian kernel of standard deviation `5.0`.
-* `Ytr`,*n* x *t* matrix, containing the labels of the training points  (where *t* is the length of the label vector associated to each point. It is 1 for monovariate regression problems and binary classification, otherwise it is equal to the number of classes, for multiclass classification tasks or for multivariate regression); 
+* `Ytr`,`n` x `t` matrix, containing the labels of the training points  (where *t* is the length of the label vector associated to each point. It is 1 for monovariate regression problems and binary classification, otherwise it is equal to the number of classes, for multiclass classification tasks or for multivariate regression); 
 * `lambda`,positive double, the regularization parameter;
 * `T`, positive integer, the number of iterations;
 * `cobj, callback` respectively a support object and callback function called at the end of each iteration; e.g. `cobj = []; callback = @(alpha, cobj_iter) [];` to do nothing. To understand how to use them, note that at each iteration `cobj_iter = callback(alpha, cobj_iter)`.
