@@ -4,13 +4,17 @@ end
 
 
 function D = res(X1, X2, sigma)
-    D = -2.0*X1*X2';
 
     sq1 = sum(X1.^2,2);
-    clear X1
 
     sq2 = sum(X2.^2,2)';
+
+    D = X1*X2';
+
     clear X2
+    clear X1
+
+    D = -2.0*D;
 
     D = bsxfun(@plus, D, sq2);
     clear sq2

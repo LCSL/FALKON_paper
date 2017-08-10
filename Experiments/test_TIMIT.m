@@ -42,7 +42,7 @@ m = 100000;
 trp = randperm(ntr,m);
 Xuni = Xtr(trp,:);
 
-T = 25;
+T = 15;
 
 cobj = [];
 

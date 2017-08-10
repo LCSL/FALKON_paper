@@ -351,17 +351,17 @@ function M = blockKernComp(A, B, kern, kerMemCoefficient, freeDoubles, useGPU)
     if useGPU && ~issparse(A) && ~issparse(B)
         gD = gpuDevice();
         dbmem = gD.AvailableMemory/8;
-        d = size(A,2);
+        d = 2*size(A,2);
         nmax_gpu = floor((sqrt(d^2 + kerMemCoefficient*dbmem)-d)/kerMemCoefficient);
         nmax_ram = floor(sqrt(freeDoubles));
         nmax = min(nmax_gpu, nmax_ram);
 
         if nmax > size(A,1) && size(A,1) <= size(B,1)
             nmaxA = size(A,1);
-            nmaxB = min(floor(dbmem/(d + nmaxA*(kerMemCoefficient + d))), floor(freeDoubles/nmaxA));
+            nmaxB = min(floor((dbmem - nmaxA*(kerMemCoefficient + d))/(nmaxA + kerMemCoefficient + d)), floor(freeDoubles/nmaxA));
         elseif nmax > size(B,1)
             nmaxB = size(B,1);
-            nmaxA = min(floor(dbmem/(d + nmaxB*(kerMemCoefficient + d))), floor(freeDoubles/nmaxB));
+            nmaxA = min(floor((dbmem - nmaxB*(kerMemCoefficient + d))/(nmaxB + kerMemCoefficient + d)), floor(freeDoubles/nmaxB));
         else
             nmaxA = nmax;
             nmaxB = nmax;
