@@ -1,5 +1,14 @@
 # FALKON_paper
 
+> **_:grey_exclamation:NOTE:grey_exclamation::_**
+> A new and improved version of the Falkon algorithm is now available at (https://github.com/FalkonML/falkon):
+>
+>  - Built on top of PyTorch
+>  - Lightning fast
+>  - Multi-GPU support
+>  - Logistic loss support
+
+
 Intro
 ---------------------
 
